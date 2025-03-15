@@ -53,6 +53,7 @@
 
 ### **8. Exam Strategy**
 - **Eliminate manual steps** → AWS **fully managed services** are preferred.
+- **Avoid non-native solutions** → AWS-managed services are almost always the right choice (e.g., Kibana < CloudWatch).  
 - **Choose serverless options when available** → Lambda, EventBridge, Step Functions.
 - **For security questions** → Look for **IAM, VPC, KMS, Macie**.
 - **For cost optimization** → Spot instances for training, Multi-Model Endpoints for inference.
