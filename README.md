@@ -121,62 +121,95 @@ These are the **most important takeaways** to maximize your chances of passing t
 - **For metadata management → Use AWS Glue Data Catalog**.
 - **For securing ML data → Use Macie, KMS, IAM, and Lake Formation**.
 
-## **Task Statement 1.1: Create Data Repositories for ML**
+## **Task Statement 1.2: Identify and Implement a Data Ingestion Solution**
 
-### **1. Data Storage Options for ML**
-- **Amazon S3** → Scalable object storage for large datasets.
-- **Amazon Redshift** → Columnar data warehouse optimized for analytical queries.
-- **Amazon RDS** → Managed relational database for structured data.
-- **Amazon DynamoDB** → NoSQL key-value store for high-speed low-latency queries.
-- **Amazon Timestream** → Optimized for time-series data (sensor data, logs).
-- **Amazon FSx for Lustre** → High-performance file storage for ML workloads.
-- **Amazon EFS** → Fully managed file system for shared access.
-- **AWS Glue Data Catalog** → Centralized metadata store for ML datasets.
+### **1. Understanding Data Ingestion**
+- **Data ingestion** is the process of collecting and importing data from different sources into a storage system for further processing.
+- Two main types:
+  - **Batch Ingestion** → Processes data at scheduled intervals.
+  - **Real-Time Streaming** → Processes data continuously as it arrives.
 
-### **2. Choosing the Right Storage for ML**
-| **Use Case**               | **Best Storage Option**        |
-|---------------------------|--------------------------------|
-| Large-scale object storage | **Amazon S3**                 |
-| Fast analytical queries    | **Amazon Redshift**           |
-| Structured relational data | **Amazon RDS**                |
-| NoSQL key-value lookups    | **Amazon DynamoDB**           |
-| Time-series data           | **Amazon Timestream**         |
-| High-performance training  | **Amazon FSx for Lustre**     |
-| Shared file storage        | **Amazon EFS**                |
-| Metadata management        | **AWS Glue Data Catalog**     |
+---
 
-### **3. Data Lake Architecture**
-- **Amazon S3** → Primary storage for raw, processed, and enriched ML data.
-- **AWS Lake Formation** → Automates security, permissions, and access control for data lakes.
-- **AWS Glue** → Extract, Transform, Load (ETL) service to prepare ML data.
-- **Amazon Athena** → Query data in S3 using SQL (serverless).
-- **Amazon Redshift Spectrum** → Query S3 data using Redshift.
-- **Amazon EMR** → Process large-scale data using Spark, Hadoop.
+### **2. AWS Services for Data Ingestion**
+| **Data Type**          | **Best AWS Service**      | **Use Case** |
+|-----------------------|-------------------------|-------------|
+| **Batch ETL Processing** | AWS Glue               | Scheduled ingestion with ETL processing. |
+| **Database Migration** | AWS Database Migration Service (DMS) | Migrating on-prem databases to AWS. |
+| **Event-Driven Data Capture** | Amazon EventBridge | Triggering actions based on events. |
+| **Real-Time Streaming** | Amazon Kinesis Data Streams | High-throughput event streaming. |
+| **Streaming to Data Lakes** | Amazon Kinesis Data Firehose | Automatic loading into S3, Redshift, OpenSearch. |
+| **Managed Kafka Streaming** | Amazon MSK (Managed Kafka) | Message-driven ingestion for microservices. |
+| **SaaS Data Integration** | Amazon AppFlow | Integrates SaaS applications with AWS. |
+| **Bulk Data Transfer** | AWS Snowball, AWS Snowmobile | Large-scale offline data transfer. |
 
-### **4. Security & Access Control**
-- **IAM Roles & Policies** → Restrict access to ML data repositories.
-- **Amazon Macie** → Detects sensitive data in S3 (PII, credentials).
-- **AWS Key Management Service (KMS)** → Encrypts ML data at rest.
-- **VPC Endpoints** → Secure access to S3 without internet exposure.
+- **Rule of Thumb**: Use **Glue for batch ETL, Kinesis for real-time streaming, MSK for Kafka-based pipelines, and DMS for database migration**.
 
-### **5. Data Governance & Compliance**
-- **AWS Lake Formation** → Simplifies access control.
-- **AWS Glue Data Catalog** → Maintains metadata consistency.
-- **Amazon Macie** → Identifies security risks in stored data.
-- **AWS Audit Manager** → Helps with compliance tracking.
+---
+
+### **3. Batch vs. Real-Time Data Ingestion**
+#### **Batch Ingestion**
+- **Processes data at scheduled intervals**.
+- **Best for**:
+  - Periodic ETL jobs.
+  - Data warehouse loading.
+  - Reporting and analytics.
+
+#### **Real-Time Streaming**
+- **Processes events as they arrive**.
+- **Best for**:
+  - IoT sensor data.
+  - Fraud detection.
+  - Log analysis.
+
+- **Rule of Thumb**: **Use batch for scheduled ingestion, real-time for continuous event processing**.
+
+---
+
+### **4. Secure & Scalable Data Ingestion**
+| **Security Measure**  | **AWS Service** | **Use Case** |
+|----------------------|----------------|-------------|
+| **Data Encryption** | AWS KMS | Encrypts data at rest and in transit. |
+| **Access Control** | IAM Policies | Restricts ingestion access. |
+| **Private Network Transfer** | AWS PrivateLink, VPC Endpoints | Secure, private data transfer. |
+
+- **Rule of Thumb**: **Use KMS for encryption, IAM for access control, and PrivateLink for secure ingestion**.
+
+---
+
+### **5. AWS Storage Targets for Ingested Data**
+| **Storage Type** | **Best AWS Service** | **Use Case** |
+|----------------|----------------------|-------------|
+| **Object Storage** | Amazon S3 | Storing raw and processed data. |
+| **Data Warehouse** | Amazon Redshift | Analytical queries and reporting. |
+| **NoSQL Database** | Amazon DynamoDB | Low-latency key-value lookups. |
+| **Relational Database** | Amazon RDS, Aurora | Structured transactional data. |
+
+- **Rule of Thumb**: **Use S3 for data lakes, Redshift for analytics, DynamoDB for NoSQL, and RDS for structured data**.
+
+---
+
+### **6. AWS Services for Orchestrating Ingestion Pipelines**
+| **Service** | **Use Case** |
+|------------|-------------|
+| **AWS Glue Workflows** | Manages ETL pipelines. |
+| **Amazon MWAA (Managed Airflow)** | Orchestrates complex workflows. |
+| **Step Functions** | Automates multi-step workflows. |
+
+- **Rule of Thumb**: **Use Glue Workflows for ETL, Airflow for complex workflows, and Step Functions for event-driven automation**.
 
 ---
 
 ## **Exam Rules of Thumb**
-- **For ML data storage → Use S3** (most scalable & cost-effective).
-- **For fast analytical queries → Use Redshift**.
-- **For structured relational data → Use RDS**.
-- **For high-speed NoSQL lookups → Use DynamoDB**.
-- **For time-series ML data → Use Timestream**.
-- **For high-performance ML training → Use FSx for Lustre**.
-- **For shared access file storage → Use EFS**.
-- **For metadata management → Use AWS Glue Data Catalog**.
-- **For securing ML data → Use Macie, KMS, IAM, and Lake Formation**.
+- **For batch ingestion** → Use **AWS Glue for ETL, DMS for database migrations**.
+- **For real-time streaming** → Use **Kinesis Data Streams or Kinesis Firehose**.
+- **For Kafka-based ingestion** → Use **Amazon MSK**.
+- **For SaaS data integration** → Use **Amazon AppFlow**.
+- **For large offline data transfers** → Use **AWS Snowball/Snowmobile**.
+- **For securing ingestion pipelines** → Use **KMS for encryption, IAM for access control, and VPC Endpoints for private data transfer**.
+- **For orchestration** → Use **Glue Workflows, MWAA (Airflow), or Step Functions**.
+
+---
 
 ## **Task Statement 1.3: Identify and Implement a Data Transformation Solution**
 
