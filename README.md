@@ -59,6 +59,7 @@
 - **For cost optimization** → Spot instances for training, Multi-Model Endpoints for inference.
 - **For high availability** → Deploy across multiple **Availability Zones (Multi-AZ)**.
 - **For fault tolerance** → Use **checkpointing, backups, redundancy**.
+- **For most-efficient solutions** --> Use managed solutions (i.e. AWS Comprehend) instead SageMaker.
 
 ---
 These are the **most important takeaways** to maximize your chances of passing the AWS Certified Machine Learning Specialty exam! 
