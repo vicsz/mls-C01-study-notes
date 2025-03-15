@@ -1,4 +1,234 @@
-# mls-C01-study-notes
+# AWS Certified Machine Learning - Specialty (MLS-C01) Exam Study Notes
+
+# Domain 1: Data Engineering 
+## **Task Statement 1.1: Create Data Repositories for ML**
+
+### **1. Data Storage Options for ML**
+- **Amazon S3** → Scalable object storage for large datasets.
+- **Amazon Redshift** → Columnar data warehouse optimized for analytical queries.
+- **Amazon RDS** → Managed relational database for structured data.
+- **Amazon DynamoDB** → NoSQL key-value store for high-speed low-latency queries.
+- **Amazon Timestream** → Optimized for time-series data (sensor data, logs).
+- **Amazon FSx for Lustre** → High-performance file storage for ML workloads.
+- **Amazon EFS** → Fully managed file system for shared access.
+- **AWS Glue Data Catalog** → Centralized metadata store for ML datasets.
+
+### **2. Choosing the Right Storage for ML**
+| **Use Case**               | **Best Storage Option**        |
+|---------------------------|--------------------------------|
+| Large-scale object storage | **Amazon S3**                 |
+| Fast analytical queries    | **Amazon Redshift**           |
+| Structured relational data | **Amazon RDS**                |
+| NoSQL key-value lookups    | **Amazon DynamoDB**           |
+| Time-series data           | **Amazon Timestream**         |
+| High-performance training  | **Amazon FSx for Lustre**     |
+| Shared file storage        | **Amazon EFS**                |
+| Metadata management        | **AWS Glue Data Catalog**     |
+
+### **3. Data Lake Architecture**
+- **Amazon S3** → Primary storage for raw, processed, and enriched ML data.
+- **AWS Lake Formation** → Automates security, permissions, and access control for data lakes.
+- **AWS Glue** → Extract, Transform, Load (ETL) service to prepare ML data.
+- **Amazon Athena** → Query data in S3 using SQL (serverless).
+- **Amazon Redshift Spectrum** → Query S3 data using Redshift.
+- **Amazon EMR** → Process large-scale data using Spark, Hadoop.
+
+### **4. Security & Access Control**
+- **IAM Roles & Policies** → Restrict access to ML data repositories.
+- **Amazon Macie** → Detects sensitive data in S3 (PII, credentials).
+- **AWS Key Management Service (KMS)** → Encrypts ML data at rest.
+- **VPC Endpoints** → Secure access to S3 without internet exposure.
+
+### **5. Data Governance & Compliance**
+- **AWS Lake Formation** → Simplifies access control.
+- **AWS Glue Data Catalog** → Maintains metadata consistency.
+- **Amazon Macie** → Identifies security risks in stored data.
+- **AWS Audit Manager** → Helps with compliance tracking.
+
+---
+
+## **Exam Rules of Thumb**
+- **For ML data storage → Use S3** (most scalable & cost-effective).
+- **For fast analytical queries → Use Redshift**.
+- **For structured relational data → Use RDS**.
+- **For high-speed NoSQL lookups → Use DynamoDB**.
+- **For time-series ML data → Use Timestream**.
+- **For high-performance ML training → Use FSx for Lustre**.
+- **For shared access file storage → Use EFS**.
+- **For metadata management → Use AWS Glue Data Catalog**.
+- **For securing ML data → Use Macie, KMS, IAM, and Lake Formation**.
+
+## **Task Statement 1.1: Create Data Repositories for ML**
+
+### **1. Data Storage Options for ML**
+- **Amazon S3** → Scalable object storage for large datasets.
+- **Amazon Redshift** → Columnar data warehouse optimized for analytical queries.
+- **Amazon RDS** → Managed relational database for structured data.
+- **Amazon DynamoDB** → NoSQL key-value store for high-speed low-latency queries.
+- **Amazon Timestream** → Optimized for time-series data (sensor data, logs).
+- **Amazon FSx for Lustre** → High-performance file storage for ML workloads.
+- **Amazon EFS** → Fully managed file system for shared access.
+- **AWS Glue Data Catalog** → Centralized metadata store for ML datasets.
+
+### **2. Choosing the Right Storage for ML**
+| **Use Case**               | **Best Storage Option**        |
+|---------------------------|--------------------------------|
+| Large-scale object storage | **Amazon S3**                 |
+| Fast analytical queries    | **Amazon Redshift**           |
+| Structured relational data | **Amazon RDS**                |
+| NoSQL key-value lookups    | **Amazon DynamoDB**           |
+| Time-series data           | **Amazon Timestream**         |
+| High-performance training  | **Amazon FSx for Lustre**     |
+| Shared file storage        | **Amazon EFS**                |
+| Metadata management        | **AWS Glue Data Catalog**     |
+
+### **3. Data Lake Architecture**
+- **Amazon S3** → Primary storage for raw, processed, and enriched ML data.
+- **AWS Lake Formation** → Automates security, permissions, and access control for data lakes.
+- **AWS Glue** → Extract, Transform, Load (ETL) service to prepare ML data.
+- **Amazon Athena** → Query data in S3 using SQL (serverless).
+- **Amazon Redshift Spectrum** → Query S3 data using Redshift.
+- **Amazon EMR** → Process large-scale data using Spark, Hadoop.
+
+### **4. Security & Access Control**
+- **IAM Roles & Policies** → Restrict access to ML data repositories.
+- **Amazon Macie** → Detects sensitive data in S3 (PII, credentials).
+- **AWS Key Management Service (KMS)** → Encrypts ML data at rest.
+- **VPC Endpoints** → Secure access to S3 without internet exposure.
+
+### **5. Data Governance & Compliance**
+- **AWS Lake Formation** → Simplifies access control.
+- **AWS Glue Data Catalog** → Maintains metadata consistency.
+- **Amazon Macie** → Identifies security risks in stored data.
+- **AWS Audit Manager** → Helps with compliance tracking.
+
+---
+
+## **Exam Rules of Thumb**
+- **For ML data storage → Use S3** (most scalable & cost-effective).
+- **For fast analytical queries → Use Redshift**.
+- **For structured relational data → Use RDS**.
+- **For high-speed NoSQL lookups → Use DynamoDB**.
+- **For time-series ML data → Use Timestream**.
+- **For high-performance ML training → Use FSx for Lustre**.
+- **For shared access file storage → Use EFS**.
+- **For metadata management → Use AWS Glue Data Catalog**.
+- **For securing ML data → Use Macie, KMS, IAM, and Lake Formation**.
+
+## **Task Statement 1.3: Identify and Implement a Data Transformation Solution**
+
+### **1. Data Transformation Services**
+- **AWS Glue** → Fully managed ETL (Extract, Transform, Load) service.
+- **Amazon EMR** → Hadoop/Spark-based big data processing.
+- **AWS Lambda** → Serverless transformations for real-time processing.
+- **Amazon Kinesis Data Analytics** → SQL-based real-time stream processing.
+- **Amazon Redshift Spectrum** → Query & transform S3 data using Redshift.
+- **AWS Data Wrangler** → Simplifies Pandas-based data transformations in AWS.
+- **Amazon SageMaker Processing** → Preprocessing for ML workloads.
+
+---
+
+### **2. Choosing the Right Data Transformation Solution**
+| **Use Case**                         | **Best Transformation Service** |
+|-------------------------------------|------------------------------|
+| Batch ETL Processing                | **AWS Glue**                 |
+| Large-scale distributed ETL         | **Amazon EMR**               |
+| Real-time event processing          | **Kinesis Data Analytics**   |
+| Serverless transformations          | **AWS Lambda**               |
+| SQL-based transformation on S3 data | **Redshift Spectrum**        |
+| Python-based Pandas transformation  | **AWS Data Wrangler**        |
+| ML-specific data processing         | **SageMaker Processing**     |
+
+---
+
+### **3. Batch vs. Real-Time Transformation**
+#### **Batch Processing**
+- **AWS Glue** (recommended for ETL) or **Amazon EMR** (for big data).
+- Used for **large, periodic transformations** (e.g., daily batch jobs).
+- **Example**: Cleaning raw customer purchase data in S3 before loading to Redshift.
+
+#### **Real-Time Transformation**
+- **AWS Lambda** → Low-latency transformations for event-driven architectures.
+- **Kinesis Data Analytics** → SQL-based real-time streaming transformations.
+- **Amazon EMR with Spark Streaming** → Large-scale stream processing.
+- **Example**: Processing IoT sensor data in near real-time.
+
+- **Rule of Thumb**: Use **batch for scheduled processing**, **real-time for streaming transformations**.
+
+---
+
+### **4. Common Data Transformation Techniques**
+- **Data Cleaning** → Handling missing values, deduplication.
+- **Data Normalization** → Scaling numerical values for ML.
+- **Feature Engineering** → Creating new features for ML models.
+- **Data Aggregation** → Summarizing data at different levels (daily, monthly).
+- **Schema Mapping** → Converting data formats (e.g., CSV to Parquet).
+- **Data Enrichment** → Combining data from multiple sources.
+
+---
+
+### **5. Example Transformation Pipelines**
+#### **1. Batch ETL Pipeline**
+- **Source**: S3, databases.
+- **Transformation**: AWS Glue (PySpark, Python).
+- **Storage**: Amazon Redshift, S3.
+
+#### **2. Real-Time Transformation Pipeline**
+- **Source**: IoT devices, logs, clickstream data.
+- **Transformation**: Kinesis Data Analytics, AWS Lambda.
+- **Storage**: Amazon OpenSearch, DynamoDB, S3.
+
+#### **3. ML Data Processing Pipeline**
+- **Source**: S3, Data Lake.
+- **Transformation**: SageMaker Processing (Pandas, Scikit-learn).
+- **Storage**: Amazon Feature Store, S3.
+
+---
+
+### **6. Security & Cost Considerations**
+- **Security**:
+  - Use **IAM Roles & Policies** to restrict access.
+  - Use **KMS encryption** for securing transformed data.
+- **Cost Optimization**:
+  - **Glue vs EMR**: Use Glue for serverless, EMR for massive-scale processing.
+  - **Lambda vs Kinesis Analytics**: Use Lambda for lightweight transformations, Kinesis Analytics for continuous data streams.
+
+---
+
+## **Exam Rules of Thumb**
+- **Batch ETL Processing** → Use **AWS Glue** (serverless) or **EMR** (big data).
+- **Real-Time Transformations** → Use **Kinesis Data Analytics** for streaming, **AWS Lambda** for event-driven transformations.
+- **SQL-Based Transformations on S3** → Use **Redshift Spectrum**.
+- **For Python-based Transformations** → Use **AWS Data Wrangler**.
+- **For ML Preprocessing** → Use **SageMaker Processing**.
+- **Secure Transformations** → Use **IAM, VPC Endpoints, and KMS Encryption**.
+
+# Domain 2: Exploratory Data Analysis
+## Task Statement 2.1: Sanitize and prepare data for modeling.
+## Task Statement 2.2: Perform feature engineering.
+## Task Statement 2.3: Analyze and visualize data for ML.
+
+
+
+# Domain 3: Modeling
+## Task Statement 3.1: Frame business problems as ML problems.
+## Task Statement 3.2: Select the appropriate model(s) for a given ML problem.
+## Task Statement 3.3: Train ML models.
+## Task Statement 3.4: Perform hyperparameter optimization.
+## Task Statement 3.5: Evaluate ML models.
+
+
+# Domain 4: Machine Learning Implementation and Operations
+## Task Statement 4.1: Build ML solutions for performance, availability, scalability,
+resiliency, and fault tolerance.
+## Task Statement 4.2: Recommend and implement the appropriate ML services and
+features for a given problem.
+## Task Statement 4.3: Apply basic AWS security practices to ML solutions
+## Task Statement 4.4: Deploy and operationalize ML solutions.
+
+
+
+
 
 # **Amazon SageMaker - Exam Cheat Sheet**
 
