@@ -509,11 +509,480 @@
 - **For AWS tools** → **QuickSight for dashboards, Data Wrangler for ML prep, Glue DataBrew for no-code cleaning**.
 
 # Domain 3: Modeling
-## Task Statement 3.1: Frame business problems as ML problems.
-## Task Statement 3.2: Select the appropriate model(s) for a given ML problem.
-## Task Statement 3.3: Train ML models.
-## Task Statement 3.4: Perform hyperparameter optimization.
-## Task Statement 3.5: Evaluate ML models.
+## **Task Statement 3.1: Frame Business Problems as ML Problems**
+
+### **1. Understanding the Business Problem**
+- The first step in any ML project is to **clearly define the business problem**.
+- Convert business objectives into **measurable ML tasks**.
+- Identify **key success metrics** (accuracy, recall, precision, MSE, etc.).
+- Consider **data availability and feasibility**.
+
+---
+
+### **2. Identifying the ML Problem Type**
+| **Business Problem**                      | **ML Problem Type**           | **Example Use Case** |
+|------------------------------------------|-----------------------------|----------------------|
+| Predicting future sales                  | **Regression**               | Sales forecasting, stock price prediction. |
+| Classifying customer reviews as positive or negative | **Classification**          | Sentiment analysis, spam detection. |
+| Recommending products to customers       | **Recommendation System**    | E-commerce, media recommendations. |
+| Detecting fraudulent transactions        | **Anomaly Detection**        | Credit card fraud detection. |
+| Segmenting customers into groups         | **Clustering**               | Customer segmentation. |
+| Translating text from English to Spanish | **Natural Language Processing (NLP)** | Machine translation. |
+| Identifying objects in images            | **Computer Vision**          | Self-driving cars, medical imaging. |
+| Predicting machine failure               | **Time-Series Forecasting**  | Predictive maintenance. |
+
+- **Rule of Thumb**: Identify whether the problem is **supervised (labeled data)**, **unsupervised (no labels)**, or a **reinforcement learning** problem.
+
+---
+
+### **3. Defining Success Metrics**
+- **Classification**:
+  - **Accuracy** → Overall correctness.
+  - **Precision** → How many predicted positives were correct.
+  - **Recall** → How many actual positives were identified.
+  - **F1-Score** → Balance between precision and recall (use when data is imbalanced).
+- **Regression**:
+  - **Mean Squared Error (MSE)** → Penalizes large errors.
+  - **Mean Absolute Error (MAE)** → Less sensitive to outliers.
+  - **R² Score** → Measures model fit.
+- **Recommendation Systems**:
+  - **Hit Rate** → Percentage of correct recommendations.
+  - **Mean Average Precision (MAP)** → Evaluates ranking quality.
+- **Anomaly Detection**:
+  - **False Positive Rate (FPR)** → Important in fraud detection.
+
+- **Rule of Thumb**: Use **accuracy for balanced classes, F1-score for imbalanced classes, MSE for regression, and hit rate for recommendation systems**.
+
+---
+
+### **4. Data Availability & Feasibility**
+- Determine **if enough labeled data is available** for supervised learning.
+- Check for **data quality issues** (missing values, duplicates, outliers).
+- Identify **real-time vs. batch processing needs**.
+- Consider **regulatory and compliance constraints**.
+
+- **Rule of Thumb**: **Supervised learning requires labeled data, unsupervised learning works without labels, reinforcement learning is goal-based**.
+
+---
+
+### **5. Choosing the Right ML Approach**
+| **Scenario**                      | **Best Approach** |
+|-----------------------------------|------------------|
+| Predicting a continuous value    | **Regression** |
+| Categorizing data into classes   | **Classification** |
+| Finding hidden patterns in data  | **Clustering** |
+| Detecting rare events            | **Anomaly Detection** |
+| Improving decisions over time    | **Reinforcement Learning** |
+| Understanding text               | **NLP (Transformers, BERT)** |
+| Recognizing images               | **Computer Vision (CNNs, YOLO)** |
+
+- **Rule of Thumb**: **Choose Regression for continuous predictions, Classification for discrete categories, Clustering for grouping, and Anomaly Detection for fraud and rare event detection**.
+
+---
+
+### **6. AWS ML Services for Different Problem Types**
+| **ML Task**                | **AWS Service**            |
+|---------------------------|--------------------------|
+| Supervised Learning       | Amazon SageMaker, AutoML |
+| Unsupervised Learning     | SageMaker (K-Means, PCA) |
+| Time-Series Forecasting   | Amazon Forecast, DeepAR |
+| NLP                      | Amazon Comprehend, SageMaker NLP models |
+| Computer Vision          | Amazon Rekognition, SageMaker CV models |
+| Recommendation Systems   | Amazon Personalize |
+| Anomaly Detection       | SageMaker Random Cut Forest, Lookout for Fraud |
+
+- **Rule of Thumb**: Use **SageMaker for most ML tasks, Personalize for recommendations, Forecast for time-series, Rekognition for images, and Comprehend for NLP**.
+
+---
+
+## **Exam Rules of Thumb**
+- **Convert business problems into ML problems** by defining **input, output, and success metrics**.
+- **Supervised learning needs labeled data**, while **unsupervised learning finds patterns in unlabeled data**.
+- **Regression predicts numbers, Classification predicts categories**.
+- **Use F1-score for imbalanced datasets, Accuracy for balanced datasets**.
+- **Use AWS SageMaker for most ML models, Amazon Forecast for time-series, Amazon Personalize for recommendations**.
+
+## **Task Statement 3.2: Select the Appropriate Model(s) for a Given ML Problem**
+
+### **1. Understanding Model Selection**
+- The right model depends on **the type of problem, data characteristics, and business goals**.
+- Considerations include:
+  - **Supervised vs. Unsupervised Learning**.
+  - **Size and quality of the dataset**.
+  - **Computational resources required**.
+  - **Interpretability vs. accuracy trade-off**.
+
+---
+
+### **2. Choosing the Right ML Model by Problem Type**
+| **ML Problem Type**          | **Best Model Choices** | **Example Use Case** |
+|-----------------------------|------------------------|----------------------|
+| **Regression (Predicting Continuous Values)** | Linear Regression, XGBoost (regression), DeepAR (time-series) | Sales forecasting, house price prediction |
+| **Binary Classification (Two Classes)** | Logistic Regression, Random Forest, XGBoost, SVM | Fraud detection, spam detection |
+| **Multi-Class Classification (More than Two Classes)** | XGBoost, Neural Networks, Random Forest | Image classification, sentiment analysis |
+| **Clustering (Unsupervised Grouping)** | K-Means, Hierarchical Clustering, DBSCAN | Customer segmentation, topic modeling |
+| **Anomaly Detection** | Random Cut Forest (RCF), Isolation Forest, Autoencoders | Fraud detection, network security monitoring |
+| **Time-Series Forecasting** | ARIMA, Prophet, DeepAR | Predicting stock prices, weather forecasting |
+| **Recommendation Systems** | Collaborative Filtering, Amazon Personalize, Object2Vec | Product recommendations, movie suggestions |
+| **Natural Language Processing (NLP)** | BERT, Word2Vec, BlazingText, Seq2Seq | Sentiment analysis, text translation |
+| **Computer Vision** | CNNs, YOLO, Faster R-CNN, Amazon Rekognition | Image recognition, facial detection |
+
+- **Rule of Thumb**: Use **Linear Models for simple relationships, Tree-Based Models for structured data, Neural Networks for complex tasks, and Unsupervised Models for pattern discovery**.
+
+---
+
+### **3. Model Complexity vs. Interpretability Trade-off**
+| **Model Type**         | **Interpretability** | **Accuracy** | **Use Case** |
+|------------------------|---------------------|-------------|-------------|
+| **Linear Regression**  | High               | Low         | Simple predictions |
+| **Decision Trees**     | Medium             | Medium      | Rule-based decision making |
+| **Random Forest**      | Medium             | High        | Structured tabular data |
+| **XGBoost**           | Low                | Very High   | Competitive ML tasks |
+| **Neural Networks**    | Very Low           | Very High   | Deep learning applications |
+
+- **Rule of Thumb**: **Use interpretable models (Linear Regression, Decision Trees) when explainability is needed. Use complex models (XGBoost, Deep Learning) when accuracy is the priority**.
+
+---
+
+### **4. Model Selection Based on Data Size**
+| **Dataset Size**         | **Best Model Choices** |
+|-------------------------|----------------------|
+| **Small (<10K rows)**   | Logistic Regression, Decision Trees, SVM |
+| **Medium (10K - 1M rows)** | Random Forest, XGBoost, K-Means |
+| **Large (>1M rows)**    | Deep Learning, Apache Spark ML, SageMaker distributed training |
+
+- **Rule of Thumb**: Use **Lightweight models for small data, XGBoost for structured data, and Deep Learning for large datasets**.
+
+---
+
+### **5. Model Selection Based on Computational Resources**
+| **Computational Resource** | **Best Model Choices** |
+|---------------------------|----------------------|
+| **Low (CPU-only)**        | Logistic Regression, Decision Trees, K-Means |
+| **Medium (CPU/GPU hybrid)** | Random Forest, XGBoost, CNNs |
+| **High (Multi-GPU, Distributed)** | Deep Learning, Reinforcement Learning |
+
+- **Rule of Thumb**: Use **Lightweight models (Logistic Regression, Decision Trees) on CPUs, and Deep Learning on GPUs**.
+
+---
+
+### **6. AWS ML Services for Model Selection**
+| **ML Task**             | **AWS Service**            |
+|------------------------|--------------------------|
+| Regression            | SageMaker Linear Learner, XGBoost |
+| Classification        | SageMaker XGBoost, AutoGluon |
+| Clustering           | SageMaker K-Means, PCA |
+| Anomaly Detection    | SageMaker Random Cut Forest |
+| Time-Series Forecasting | Amazon Forecast, DeepAR |
+| NLP                  | Amazon Comprehend, BlazingText |
+| Computer Vision      | Amazon Rekognition, SageMaker Vision Models |
+| Recommendation Systems | Amazon Personalize |
+
+- **Rule of Thumb**: Use **SageMaker XGBoost for structured ML, Rekognition for images, Forecast for time-series, and Personalize for recommendations**.
+
+---
+
+## **Exam Rules of Thumb**
+- **For regression** → Use **Linear Regression, XGBoost, DeepAR**.
+- **For classification** → Use **XGBoost, Random Forest, SVM**.
+- **For clustering** → Use **K-Means, DBSCAN**.
+- **For anomaly detection** → Use **Random Cut Forest, Isolation Forest**.
+- **For NLP** → Use **BERT, BlazingText, Amazon Comprehend**.
+- **For Computer Vision** → Use **CNNs, Rekognition**.
+- **For time-series forecasting** → Use **DeepAR, Amazon Forecast**.
+- **For recommendation systems** → Use **Amazon Personalize**.
+- **For low-resource environments** → Use **Linear Models, Decision Trees**.
+- **For large datasets** → Use **Deep Learning, Distributed Training**.
+
+## **Task Statement 3.3: Train ML Models**
+
+### **1. Data Splitting for Training & Validation**
+- **Goal**: Prevent overfitting by training on one subset of data and validating on another.
+- **Common Splits**:
+  - **80/20** → 80% training, 20% testing (default choice).
+  - **70/15/15** → 70% training, 15% validation, 15% testing (for hyperparameter tuning).
+  - **Time-Series Splitting** → Uses rolling windows instead of random splits.
+  - **Stratified Sampling** → Ensures class balance in classification tasks.
+
+- **Rule of Thumb**: Use **80/20 split for general ML, rolling windows for time-series, stratified sampling for imbalanced classification**.
+
+---
+
+### **2. Cross-Validation Techniques**
+- **K-Fold Cross-Validation** → Splits data into K subsets and trains K models.
+- **Leave-One-Out Cross-Validation (LOO-CV)** → Uses one data point for testing at a time (slow but accurate for small datasets).
+- **Stratified K-Fold** → Ensures each fold has a balanced class distribution.
+
+- **Rule of Thumb**: Use **K-Fold (default), Stratified K-Fold for imbalanced datasets, LOO for small datasets**.
+
+---
+
+### **3. Optimization Techniques for ML Training**
+#### **Gradient Descent Variants**
+| **Algorithm**            | **Description** | **Best For** |
+|-------------------------|----------------|-------------|
+| **Batch Gradient Descent** | Computes the gradient over the full dataset. | Small datasets. |
+| **Stochastic Gradient Descent (SGD)** | Updates weights after each data point. | Large datasets. |
+| **Mini-Batch Gradient Descent** | Updates weights in small batches. | Balances speed and accuracy. |
+| **Adam Optimizer** | Adaptive learning rate for faster convergence. | Deep Learning models. |
+
+- **Rule of Thumb**: Use **Mini-Batch SGD for efficiency, Adam for deep learning**.
+
+#### **Regularization Methods**
+- **L1 Regularization (LASSO)** → Shrinks some weights to zero (feature selection).
+- **L2 Regularization (Ridge Regression)** → Penalizes large coefficients to prevent overfitting.
+- **ElasticNet** → Combines L1 and L2 regularization.
+
+- **Rule of Thumb**: Use **L1 for feature selection, L2 for preventing overfitting, ElasticNet for both**.
+
+---
+
+### **4. Choosing the Right Compute Resources**
+#### **CPU vs GPU for Model Training**
+| **Compute Type** | **Best For** |
+|----------------|-------------|
+| **CPU (ml.m5, ml.c5)** | Small/structured datasets, traditional ML models. |
+| **GPU (ml.p3, ml.g5, ml.p4)** | Deep learning, large-scale neural networks. |
+| **Multi-GPU (distributed)** | Large-scale deep learning training. |
+
+- **Rule of Thumb**: Use **CPU for traditional ML, GPU for deep learning, multi-GPU for massive datasets**.
+
+#### **Distributed vs Non-Distributed Training**
+- **Non-Distributed** → Single machine training (best for small datasets).
+- **Distributed Training**:
+  - **Data Parallelism** → Splits data across multiple GPUs.
+  - **Model Parallelism** → Splits model layers across multiple GPUs.
+- **AWS Tools**:
+  - **SageMaker Distributed Training** → Handles large-scale model training.
+  - **Horovod (TensorFlow/PyTorch)** → Optimized distributed training.
+
+- **Rule of Thumb**: Use **data parallelism for large datasets, model parallelism for very deep networks**.
+
+---
+
+### **5. Hyperparameter Optimization (HPO)**
+- **Goal**: Find the best model configuration.
+- **Methods**:
+  - **Grid Search** → Exhaustive search of all hyperparameter combinations.
+  - **Random Search** → Randomly samples hyperparameters (faster than grid search).
+  - **Bayesian Optimization** → Uses past results to refine search space.
+
+- **AWS Tools**:
+  - **SageMaker Automatic Model Tuning** → Runs HPO efficiently on AWS.
+  - **Hyperparameter Scaling** → Uses parallel training jobs to accelerate tuning.
+
+- **Rule of Thumb**: Use **Grid Search for small parameter spaces, Random Search for larger spaces, Bayesian Optimization for efficient tuning**.
+
+---
+
+### **6. Training Strategies**
+- **Early Stopping** → Stops training when validation loss stops improving (prevents overfitting).
+- **Learning Rate Decay** → Reduces the learning rate over time to refine model weights.
+- **Transfer Learning** → Uses pre-trained models to save training time.
+
+- **Rule of Thumb**: Use **early stopping to prevent overfitting, transfer learning for deep learning with limited data**.
+
+---
+
+### **7. Batch vs. Real-Time (Online) Model Updates**
+| **Training Type** | **Description** | **Use Case** |
+|------------------|----------------|-------------|
+| **Batch Training** | Model is retrained on new data periodically. | Stable datasets (e.g., monthly sales forecasting). |
+| **Online (Incremental) Learning** | Model updates continuously with new data. | Dynamic datasets (e.g., real-time fraud detection). |
+
+- **Rule of Thumb**: Use **batch training for periodic updates, online learning for real-time evolving data**.
+
+---
+
+### **8. AWS Services for Model Training**
+| **ML Task**             | **AWS Service**            |
+|------------------------|--------------------------|
+| Traditional ML         | Amazon SageMaker, AutoML |
+| Deep Learning         | SageMaker (TensorFlow, PyTorch, MXNet) |
+| Distributed Training   | SageMaker Distributed Training, Horovod |
+| Hyperparameter Tuning | SageMaker Automatic Model Tuning |
+| Large-Scale Training  | Amazon EMR (Apache Spark ML) |
+
+- **Rule of Thumb**: Use **SageMaker for most ML training, EMR for Spark-based distributed training**.
+
+---
+
+## **Exam Rules of Thumb**
+- **For data splitting** → Use **80/20 or 70/15/15**, **rolling windows for time-series**.
+- **For optimization** → Use **Mini-Batch SGD for efficiency, Adam for deep learning**.
+- **For regularization** → Use **L1 for feature selection, L2 for overfitting prevention**.
+- **For compute choice** → Use **CPU for small ML models, GPU for deep learning**.
+- **For distributed training** → Use **data parallelism for large datasets, model parallelism for deep networks**.
+- **For hyperparameter tuning** → Use **Grid Search for small spaces, Bayesian Optimization for efficiency**.
+- **For model retraining** → Use **batch for stable data, online learning for real-time data**.
+- **For AWS tools** → Use **SageMaker for most ML training, EMR for Spark-based ML**.
+
+## **Task Statement 3.4: Perform Hyperparameter Optimization**
+
+### **1. What is Hyperparameter Optimization (HPO)?**
+- **Hyperparameter tuning** improves model performance by finding the best configuration of hyperparameters.
+- Unlike model parameters (learned from data), hyperparameters are **manually set before training** (e.g., learning rate, batch size).
+
+---
+
+### **2. Common Hyperparameters in ML Models**
+| **Model Type**         | **Important Hyperparameters** | **Description** |
+|------------------------|---------------------------|----------------|
+| **Linear Models**      | Regularization (L1, L2) | Prevents overfitting. |
+| **Decision Trees**     | Max Depth, Min Samples Split | Controls complexity. |
+| **Random Forest**      | Number of Trees, Max Features | More trees = better accuracy but higher cost. |
+| **XGBoost**           | Learning Rate, Max Depth, Subsample | Key tuning parameters for boosting. |
+| **Deep Learning (NNs)** | Learning Rate, Batch Size, Number of Layers | Affects training speed and accuracy. |
+
+- **Rule of Thumb**: **Start with default values, tune key hyperparameters first (learning rate, max depth, number of trees/layers), and use automated tuning for efficiency**.
+
+---
+
+### **3. Hyperparameter Optimization Techniques**
+| **Method**           | **Description** | **Best For** |
+|----------------------|----------------|-------------|
+| **Grid Search**      | Tests all possible hyperparameter combinations. | Small parameter spaces, low compute cost. |
+| **Random Search**    | Randomly samples hyperparameter combinations. | Large parameter spaces, better exploration. |
+| **Bayesian Optimization** | Uses past results to refine search space. | Computational efficiency, fewer iterations. |
+| **Hyperband**        | Dynamically allocates resources to promising configurations. | Early stopping for underperforming trials. |
+| **Evolutionary Algorithms (Genetic)** | Mimics natural selection to optimize parameters. | Complex, non-differentiable search spaces. |
+
+- **Rule of Thumb**: Use **Grid Search for small spaces, Random Search for large spaces, Bayesian Optimization for efficiency, Hyperband for resource-limited tuning**.
+
+---
+
+### **4. Best Practices for Hyperparameter Tuning**
+#### **1. Start with Key Hyperparameters**
+- **Classification Models**:
+  - Decision Trees: `max_depth`, `min_samples_split`
+  - XGBoost: `learning_rate`, `max_depth`, `subsample`
+- **Deep Learning Models**:
+  - Neural Networks: `learning_rate`, `batch_size`, `dropout_rate`
+- **Rule of Thumb**: **Tuning the learning rate first has the biggest impact**.
+
+#### **2. Use Parallelization for Faster Tuning**
+- **Parallel Hyperparameter Tuning**:
+  - Run multiple experiments simultaneously.
+  - AWS SageMaker **Automatic Model Tuning** supports parallel trials.
+
+- **Rule of Thumb**: **Parallelize tuning when possible to reduce time**.
+
+#### **3. Use Early Stopping to Save Compute**
+- Stops unpromising trials early.
+- Works well with **Hyperband and Bayesian Optimization**.
+
+- **Rule of Thumb**: **Enable early stopping to avoid wasting compute**.
+
+---
+
+### **5. Hyperparameter Tuning in AWS**
+| **AWS Service**                 | **Use Case** |
+|--------------------------------|-------------|
+| **Amazon SageMaker Automatic Model Tuning** | Automated hyperparameter optimization with Bayesian optimization. |
+| **Amazon EMR + Spark MLlib** | Hyperparameter tuning in distributed ML workloads. |
+| **AWS AutoML (SageMaker Autopilot)** | Auto-selects hyperparameters along with best model. |
+
+- **Rule of Thumb**: Use **SageMaker Automatic Model Tuning for most cases, EMR for distributed ML, and Autopilot for hands-free optimization**.
+
+---
+
+### **6. Hyperparameter Tuning Workflow**
+1. **Define the search space** (set ranges for hyperparameters).
+2. **Select an optimization strategy** (Grid, Random, Bayesian).
+3. **Run tuning jobs in parallel** (if resources allow).
+4. **Use early stopping** to save compute.
+5. **Evaluate and retrain with the best hyperparameters**.
+
+---
+
+## **Exam Rules of Thumb**
+- **For small search spaces** → Use **Grid Search**.
+- **For large search spaces** → Use **Random Search**.
+- **For efficient tuning** → Use **Bayesian Optimization**.
+- **For deep learning** → Tune **learning rate, batch size, dropout rate first**.
+- **For tree-based models** → Tune **max depth, number of trees, learning rate**.
+- **For distributed tuning** → Use **SageMaker Automatic Model Tuning**.
+- **For parallel tuning** → Run multiple trials at once to speed up optimization.
+- **For compute efficiency** → Use **early stopping** to avoid wasting resources.
+
+## **Task Statement 3.5: Evaluate ML Models**
+
+### **1. Importance of Model Evaluation**
+- Ensures the model generalizes well to unseen data.
+- Identifies potential issues like **overfitting, underfitting, and bias**.
+- Helps select the best model before deployment.
+
+---
+
+### **2. Common Model Evaluation Metrics**
+| **ML Task**          | **Metric** | **Description** | **Use Case** |
+|----------------------|-----------|----------------|-------------|
+| **Classification** | Accuracy | Correct predictions / total predictions | Use when classes are balanced. |
+|  | Precision | True Positives / (True Positives + False Positives) | Use when false positives are costly (e.g., fraud detection). |
+|  | Recall | True Positives / (True Positives + False Negatives) | Use when false negatives are costly (e.g., medical diagnosis). |
+|  | F1-Score | Harmonic mean of Precision & Recall | Use when class imbalance exists. |
+|  | ROC-AUC | Measures model's ability to distinguish classes | Use when evaluating binary classifiers. |
+| **Regression** | Mean Squared Error (MSE) | Penalizes large errors more than small errors | Use when large errors should be penalized heavily. |
+|  | Mean Absolute Error (MAE) | Measures average absolute error | Use when all errors should be treated equally. |
+|  | R² Score | Measures how well the model explains variance | Higher R² means better fit. |
+| **Clustering** | Silhouette Score | Measures how well clusters are separated | Higher values indicate better-defined clusters. |
+| **Anomaly Detection** | False Positive Rate | Measures incorrect anomaly detections | Important in fraud detection. |
+| **Recommendation Systems** | Hit Rate | Measures how often recommended items are correct | Evaluates ranking quality. |
+
+- **Rule of Thumb**: **Use Accuracy for balanced classification, F1-Score for imbalanced data, MSE for regression, and ROC-AUC for binary classifiers**.
+
+---
+
+### **3. Overfitting vs. Underfitting**
+| **Issue** | **Description** | **Fix** |
+|----------|---------------|--------|
+| **Overfitting** | Model performs well on training data but poorly on new data. | Use regularization, dropout, increase training data. |
+| **Underfitting** | Model is too simple and performs poorly on both training and test data. | Increase model complexity, train longer, use more features. |
+
+- **Rule of Thumb**: **If training accuracy is high but test accuracy is low → overfitting. If both are low → underfitting**.
+
+---
+
+### **4. Cross-Validation for Robust Evaluation**
+- **K-Fold Cross-Validation** → Splits data into K folds, trains on K-1, tests on the last.
+- **Stratified K-Fold** → Ensures balanced class distribution in each fold.
+- **Leave-One-Out Cross-Validation (LOO-CV)** → Uses a single instance for testing each time.
+
+- **Rule of Thumb**: Use **K-Fold (default), Stratified K-Fold for classification, LOO for small datasets**.
+
+---
+
+### **5. Model Comparison & Selection**
+- Train multiple models using the same dataset.
+- Compare performance metrics (e.g., **F1-score, ROC-AUC, MSE**).
+- Consider **computational efficiency, interpretability, and scalability**.
+
+- **Rule of Thumb**: **Select models based on metrics relevant to the business problem (e.g., high recall for fraud detection, low MSE for price prediction).**
+
+---
+
+### **6. AWS Tools for Model Evaluation**
+| **AWS Service**               | **Use Case** |
+|-------------------------------|-------------|
+| **Amazon SageMaker Model Monitor** | Detects model drift & performance degradation. |
+| **Amazon SageMaker Clarify** | Detects bias & ensures explainability. |
+| **Amazon CloudWatch** | Monitors inference performance in production. |
+| **Amazon Athena & QuickSight** | Analyzes model performance visually. |
+
+- **Rule of Thumb**: Use **SageMaker Model Monitor for drift detection, Clarify for bias detection, and QuickSight for visualization**.
+
+---
+
+## **Exam Rules of Thumb**
+- **For classification** → Use **Accuracy (balanced), F1-Score (imbalanced), Precision/Recall (depends on false positive vs false negative cost)**.
+- **For regression** → Use **MSE (penalizes large errors), MAE (equal weight on all errors), R² (model fit quality)**.
+- **For clustering** → Use **Silhouette Score**.
+- **For recommendation systems** → Use **Hit Rate**.
+- **For fraud detection** → Prioritize **Recall over Precision**.
+- **For imbalanced datasets** → Use **F1-score & ROC-AUC instead of Accuracy**.
+- **For overfitting** → Use **regularization, dropout, or more data**.
+- **For model drift** → Use **SageMaker Model Monitor**.
+
 
 
 # Domain 4: Machine Learning Implementation and Operations
