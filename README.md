@@ -103,8 +103,6 @@
 - **For most-efficient solutions** --> Use managed solutions (i.e. AWS Comprehend) instead SageMaker.
 
 ---
-These are the **most important takeaways** to maximize your chances of passing the AWS Certified Machine Learning Specialty exam! 
-
 
 # Domain 1: Data Engineering 
 ## **Task Statement 1.1: Create Data Repositories for ML**
