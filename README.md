@@ -28,7 +28,7 @@
 - **Handling Overfitting**:  
   - **Increase regularization (L1/L2)** → L1 (Lasso) removes features, L2 (Ridge) smooths weights.  
   - **Increase dropout** → Prevents neurons from over-relying on specific features.  
-  - **Reduce unnecessary features** → Use **Recursive Feature Elimination (RFE)**.  
+  - **Reduce unnecessary features** → Use Recursive Feature Elimination (**RFE**) (removes less important features) or **PCA** (reduces dimensionality by transforming correlated features).  
   - **Enable early stopping** → Stops training if validation loss stops improving.  
   - **Lower max depth hyperparameter** → For **tree-based models (XGBoost, Decision Trees)**.  
 - **Handling Class Imbalance (CI)**:  
