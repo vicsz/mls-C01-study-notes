@@ -7,7 +7,7 @@
 - **Prefer S3 for data storage** → **Most cost-effective** storage choice, especially for ML workloads.  
 - **Avoid using EMR unless absolutely necessary** → It’s **overkill unless you need big data analytics**.  
 - **Avoid DynamoDB for ML storage** → If stuck, **DynamoDB is usually NOT the right choice**.  
-- **AWS Glue is the default for ETL (Extract, Transform, Load)** → Used for **batch data processing**.  
+- **AWS Glue is the default for ETL (Extract, Transform, Load)** → Used for **batch data processing** (unless you need realtime). 
 
 ### **2️⃣ Cost Optimization Strategies**  
 - **Use Spot Instances for cost-effective ML compute** → Saves **up to 90% on training costs** with **checkpointing**.  
