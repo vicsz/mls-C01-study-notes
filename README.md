@@ -1,5 +1,46 @@
 # AWS Certified Machine Learning - Specialty (MLS-C01) Exam Study Notes
 
+## **General Tips for AWS MLS-C01 Exam**  
+
+### **1️⃣ General Best Practices & Default AWS Choices**  
+- **Prefer managed services** → Use **AWS Comprehend instead of SageMaker** for NLP, **AWS Rekognition for image processing**.  
+- **Prefer S3 for data storage** → **Most cost-effective** storage choice, especially for ML workloads.  
+- **Avoid using EMR unless absolutely necessary** → It’s **overkill unless you need big data analytics**.  
+- **Avoid DynamoDB for ML storage** → If stuck, **DynamoDB is usually NOT the right choice**.  
+- **AWS Glue is the default for ETL (Extract, Transform, Load)** → Used for **batch data processing**.  
+
+### **2️⃣ Cost Optimization Strategies**  
+- **Use Spot Instances for cost-effective ML compute** → Saves **up to 90% on training costs** with **checkpointing**.  
+- **Prefer serverless solutions (e.g., Lambda) for cost savings** → Instead of **Kinesis for streaming workloads**.  
+- **For large-scale ML cost savings** → Use **SageMaker Multi-Model Endpoints (MME)** or **SageMaker Neo** for optimized inference.  
+
+### **3️⃣ Real-Time & Streaming ML Workloads**  
+- **For near real-time ML** → Use **Kinesis Firehose**.  
+- **For real-time ETL** → Use **Lambda with Kinesis**, **Kinesis Data Analytics (Apache Flink)** instead of **Glue or SageMaker Processing**.  
+- **Avoid Amazon MSK (Managed Kafka) and Redshift** → Typically **not the right choice for real-time ML pipelines**.  
+
+### **4️⃣ Security & Access Management**  
+- **Always assign access via IAM roles** → Avoid direct access assignments to users.  
+- **Use network isolation for SageMaker training jobs** → Blocks **outbound traffic to prevent data leaks**.  
+- **Encrypt ML artifacts & data** → Use **AWS KMS** for securing **S3, Feature Store, and model artifacts**.  
+
+### **5️⃣ ML Problem-Specific Guidance**  
+- **Handling Overfitting**:  
+  - **Increase regularization (L1/L2)** → L1 (Lasso) removes features, L2 (Ridge) smooths weights.  
+  - **Increase dropout** → Prevents neurons from over-relying on specific features.  
+  - **Reduce unnecessary features** → Use **Recursive Feature Elimination (RFE)**.  
+  - **Enable early stopping** → Stops training if validation loss stops improving.  
+  - **Lower max depth hyperparameter** → For **tree-based models (XGBoost, Decision Trees)**.  
+- **Handling Class Imbalance (CI)**:  
+  - **Use SMOTE (Synthetic Minority Oversampling Technique)** → Creates synthetic samples for underrepresented classes.  
+  - **Adjust class weights in the loss function** → Gives higher penalty to misclassified minority class.  
+  - **Avoid using accuracy as a metric** → Use **Precision-Recall AUC or F1-score** instead.  
+- **Choosing AWS AI/ML Services for Fast No-Code Solutions**:  
+  - **For the fastest, lowest-effort ML solution** → Use **AWS AI Services (Rekognition, Comprehend, Transcribe, Textract)**.  
+  - **For low-code ML model building** → Use **SageMaker Canvas or Glue DataBrew**.  
+- **Anomaly Detection** → Default choice is **Amazon Random Cut Forest (RCF)**.  
+- **Forecasting Models** → **DeepAR is usually the best choice for time-series forecasting**.  
+
 ## **AWS Certified Machine Learning Specialty - General Tips & Key Takeaways**
 
 ### **1. General AWS ML Concepts**
